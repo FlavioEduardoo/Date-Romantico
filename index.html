@@ -276,6 +276,72 @@
   }
   .progress span.active{ background: #fff; }
 
+  /* ---------- dedication page ---------- */
+  #dedicatoria-screen{
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 16px;
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  #dedicatoria-screen.hide{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96);
+  }
+  .dedic-card{
+    background: linear-gradient(160deg, var(--card-bg) 0%, var(--card-bg-2) 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 26px;
+    padding: 36px 28px 32px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.04);
+    color: var(--text-light);
+    text-align: center;
+    max-width: 420px;
+    width: 100%;
+    animation: pop-in 0.55s cubic-bezier(.2,.9,.3,1.3);
+  }
+  .dedic-big-emoji{
+    font-size: 86px;
+    line-height: 1;
+    display: block;
+    margin-bottom: 18px;
+    animation: bob 2.6s ease-in-out infinite;
+    filter: drop-shadow(0 10px 18px rgba(0,0,0,0.35));
+  }
+  .dedic-card h2{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    margin: 0 0 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  }
+  .dedic-text{
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin: 0 0 28px;
+  }
+  .dedic-text em{
+    font-style: normal;
+    color: var(--text-light);
+    font-weight: 700;
+  }
+  .dedic-divider{
+    width: 48px;
+    height: 3px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 24px;
+  }
+
   @media (max-width: 380px){
     .card{ padding: 22px 16px; }
     .card h1{ font-size: 23px; }
@@ -287,6 +353,23 @@
 </style>
 </head>
 <body>
+
+<div id="dedicatoria-screen">
+  <div class="dedic-card">
+    <span class="dedic-big-emoji">💌</span>
+    <h2>Para você, amor</h2>
+    <div class="dedic-divider"></div>
+    <p class="dedic-text">
+      Antes de mais nada, só queria que soubesse que você é a pessoa mais especial que eu tenho.<br><br>
+      Cada momento ao seu lado vira uma memória que eu guardo com muito carinho.<br><br>
+      Criei isso com todo o amor do mundo, porque <em>você merece</em>. 🖤
+      <br><br>
+      Ass: Amor da sua vida.
+      Para: Karol 🖤
+    </p>
+    <button class="btn" id="dedicBtn">Abrir o convite 💙</button>
+  </div>
+</div>
 
 <div id="hearts"></div>
 
@@ -316,17 +399,17 @@ const FOOD_OPTIONS = [
   { id: "burger", icon: "🍔", label: "Hambúrguer" },
   { id: "sushi",  icon: "🍣", label: "Sushi" },
   { id: "massas", icon: "🍝", label: "Massas" },
-  { id: "tacos",  icon: "🌮", label: "Tacos" },
+  { id: "cachorroquente",  icon: "🌭", label: "Cachorro Quente" },
   { id: "pizza",  icon: "🍕", label: "Pizza" },
 ];
 
 const VIBE_OPTIONS = [
-  { id: "golfe",     icon: "⛳", label: "Golfe" },
+  { id: "piquenique",     icon: "⛳", label: "Piquenique" },
   { id: "caminhada", icon: "🚶", label: "Caminhada" },
   { id: "cinema",    icon: "🎬", label: "Cinema" },
-  { id: "danca",     icon: "💃", label: "Dança" },
+  { id: "justdance",     icon: "💃", label: "Just Dance" },
   { id: "parque",    icon: "🎢", label: "Parque" },
-  { id: "praia",     icon: "🏖️", label: "Praia" },
+  { id: "conxinha",     icon: "🛏️", label: "Conxinha" },
 ];
 
 const NAO_MESSAGES = [
@@ -543,6 +626,18 @@ function makeHearts(count){
 
 makeHearts(22);
 render();
+
+/* ============ dedicatória ============ */
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('dedicBtn');
+  if(btn){
+    btn.addEventListener('click', () => {
+      const screen = document.getElementById('dedicatoria-screen');
+      screen.classList.add('hide');
+      setTimeout(() => screen.remove(), 650);
+    });
+  }
+});
 </script>
 </body>
 </html>
